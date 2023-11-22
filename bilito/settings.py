@@ -109,11 +109,14 @@ CORS_ALLOW_METHODS = [
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dreamy_goodall',
+        'USER': 'root',
+        'PASSWORD': 'SMhW20OJBOqwqfv6bPwdycl2',
+        'HOST': 'arthur.iran.liara.ir',   # Or an IP Address that your DB is hosted on
+        'PORT': '33231',
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
