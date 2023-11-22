@@ -1,9 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-
-
-class CustomUser(AbstractUser):
-    cellphone = models.IntegerField(max_length=12)
 
 
 class Company(models.Model):
@@ -18,3 +13,11 @@ class Blit(models.Model):
     opacity = models.IntegerField(default=0)
     fly_class = models.CharField(max_length=255)
     date = models.DateTimeField()
+    deleted = models.BooleanField(default=False)
+
+
+
+class MyFlys(models.Model):
+    deleted = models.BooleanField(default=False)
+    Blit = models.ForeignKey(Blit,on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
