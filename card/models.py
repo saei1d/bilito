@@ -1,3 +1,20 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
+
+class CustomUser(AbstractUser):
+    cellphone = models.IntegerField(max_length=12)
+
+
+class Company(models.Model):
+    name = models.CharField(max_length=155)
+
+
+class Blit(models.Model):
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    principle = models.CharField(max_length=150)
+    purpose = models.CharField(max_length=150)
+    price = models.IntegerField()
+    opacity = models.IntegerField(default=0)
+    fly_class = models.CharField(max_length=255)
+    date = models.DateTimeField()
