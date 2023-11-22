@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render
 from rest_framework import status
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import AccessToken
@@ -10,7 +11,8 @@ from client.models import CustomUser
 
 # Create your views here.
 
-class register(APIView):
+class Register(APIView):
+    permission_classes = (AllowAny,)
     def post(self, request):
         context = {}
         cellphone = request.data.get('cellphone')
@@ -33,9 +35,10 @@ class register(APIView):
 class Login(APIView):
     def post(self, request):
         context = {}
+        print('kjhbgv')
         cellphone = request.data.get('cellphone')
         password = request.data.get('password')
-        user = authenticate(request, cellphone=cellphone, password=password)
+        user = authenticate(cellphone=cellphone, password=password)
         if user:
             login(request, user)
             access_token = str(AccessToken.for_user(user))
