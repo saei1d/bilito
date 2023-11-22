@@ -6,3 +6,5 @@ django-jalali
 jdatetime
 mysqlclient
 django-cors-headers
+PyJWT==2.8.0
+djangorestframework_simplejwt

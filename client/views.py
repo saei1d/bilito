@@ -1,8 +1,10 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
+from rest_framework_simplejwt.tokens import AccessToken
+from card.serializers import CustomUserSerializer
 from client.models import CustomUser
 
 
@@ -11,9 +13,9 @@ from client.models import CustomUser
 class register(APIView):
     def post(self, request):
         context = {}
-        cellphone = request.POST.get('cellphone')
-        password = request.POST.get('password')
-        confirm = request.POST.get('confirm')
+        cellphone = request.data.get('cellphone')
+        password = request.data.get('password')
+        confirm = request.data.get('confirm')
         if CustomUser.objects.filter(cellphone=cellphone).exists():
             context['error_msg'] = 'cellphone has exist!!!'
         else:
@@ -30,9 +32,19 @@ class register(APIView):
 
 class Login(APIView):
     def post(self, request):
-        cellphone = request.POST.get('cellphone')
-        password = request.POST.get('password')
+        context = {}
+        cellphone = request.data.get('cellphone')
+        password = request.data.get('password')
         user = authenticate(request, cellphone=cellphone, password=password)
         if user:
             login(request, user)
+            access_token = str(AccessToken.for_user(user))
+            context['access_token'] = access_token
+            context['user'] = CustomUserSerializer(user, many=False).data
+            context['msg'] = 'Logged in successfully'
+            status_code = status.HTTP_200_OK
+        else:
+            context['msg'] = 'Invalid username or password'
+            status_code = status.HTTP_401_UNAUTHORIZED
+        return Response(context, status=status_code)
 
