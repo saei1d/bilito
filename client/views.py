@@ -1,15 +1,16 @@
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from client.models import CustomUser
 
 
 # Create your views here.
 
-
-def register(request):
-    context = {}
-    if request.method == 'POST':
+class register(APIView):
+    def post(self, request):
+        context = {}
         cellphone = request.POST.get('cellphone')
         password = request.POST.get('password')
         confirm = request.POST.get('confirm')
@@ -23,15 +24,15 @@ def register(request):
                 context['msg'] = 'client saved'
             else:
                 context['msg'] = "password not  matchable"
-    return Response(context)
+
+        return Response(context)
 
 
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
+class Login(APIView):
+    def post(self, request):
+        cellphone = request.POST.get('cellphone')
         password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, cellphone=cellphone, password=password)
         if user:
             login(request, user)
-            return redirect(reverse('client:home'))
-    return render(request, 'login', )
+

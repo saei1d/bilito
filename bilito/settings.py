@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     'django_jalali',
     'rest_framework',
     'drf_yasg',
+    'client'
 ]
-AUTH_USER_MODEL = 'card.CustomUser'
+AUTH_USER_MODEL = 'client.CustomUser'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
