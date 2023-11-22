@@ -1,2 +1,6 @@
 django
 djangorestframework
+drf_yasg==1.21.7
+django-cors-headers
+django-jalali
+jdatetime

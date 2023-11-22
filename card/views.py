@@ -5,4 +5,5 @@ from rest_framework.views import APIView
 # Create your views here.
 
 class mmd(APIView):
-    pass
+    def get(self):
+        pass
