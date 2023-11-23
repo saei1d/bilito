@@ -4,6 +4,7 @@ drf_yasg==1.21.7
 django-cors-headers
 django-jalali
 jdatetime
+mysqlclient==2.0.3
 django-cors-headers
 PyJWT==2.8.0
 djangorestframework_simplejwt
