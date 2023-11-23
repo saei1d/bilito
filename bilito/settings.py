@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import datetime
 from pathlib import Path
 
+from rest_framework.authentication import TokenAuthentication
+
 import bilito
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,11 +43,12 @@ INSTALLED_APPS = [
     'django_jalali',
     'rest_framework',
     'drf_yasg',
-    'client'
+    'client',
+    'rest_framework.authtoken',
+    'corsheaders',
+
 ]
 AUTH_USER_MODEL = 'client.CustomUser'
-
-DJANGO_SETTINGS_MODULE = bilito.settings
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=1),
@@ -111,6 +114,11 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 20,
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
 
 }
 

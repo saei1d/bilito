@@ -7,3 +7,4 @@ jdatetime
 django-cors-headers
 PyJWT==2.8.0
 djangorestframework_simplejwt
+mysqlclient

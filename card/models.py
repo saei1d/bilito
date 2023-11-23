@@ -18,8 +18,7 @@ class Blit(models.Model):
     deleted = models.BooleanField(default=False)
 
 
-
 class MyFlys(models.Model):
     deleted = models.BooleanField(default=False)
-    Blit = models.ForeignKey(Blit,on_delete=models.CASCADE)
-    user = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
+    Blit = models.ForeignKey(Blit, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
