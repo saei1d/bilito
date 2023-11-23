@@ -45,7 +45,7 @@ INSTALLED_APPS = [
 ]
 AUTH_USER_MODEL = 'client.CustomUser'
 
-
+DJANGO_SETTINGS_MODULE = bilito.settings
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=1),
@@ -74,10 +74,6 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': datetime.timedelta(days=1),
     'SLIDING_TOKEN_REFRESH_LIFETIME': datetime.timedelta(days=7),
 }
-
-
-
-
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -148,7 +144,7 @@ DATABASES = {
         'NAME': 'dreamy_goodall',
         'USER': 'root',
         'PASSWORD': 'SMhW20OJBOqwqfv6bPwdycl2',
-        'HOST': 'arthur.iran.liara.ir',   # Or an IP Address that your DB is hosted on
+        'HOST': 'arthur.iran.liara.ir',  # Or an IP Address that your DB is hosted on
         'PORT': '33231',
     }
 }

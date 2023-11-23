@@ -1,5 +1,4 @@
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -7,12 +6,15 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import AccessToken
 from card.serializers import CustomUserSerializer
 from client.models import CustomUser
+# from django.contrib.auth.decorators import login_required
+# from django.utils.decorators import method_decorator
 
 
 # Create your views here.
 
 class Register(APIView):
     permission_classes = (AllowAny,)
+
     def post(self, request):
         context = {}
         cellphone = request.data.get('cellphone')
@@ -51,3 +53,16 @@ class Login(APIView):
             status_code = status.HTTP_401_UNAUTHORIZED
         return Response(context, status=status_code)
 
+
+# @method_decorator(login_required)
+class Editprofile(APIView):
+    def put(self, request):
+        context = {}
+        user = CustomUser.objects.get(id=request.user)
+        user.cellphone = request.data.get('cellphone' , user.cellphone)
+        user.n_code = request.data.get('n_code', user.n_code)
+        user.first_name = request.data.get('first_name', user.first_name)
+        user.last_name = request.data.get('last_name', user.last_name)
+
+
+        return Response({'msg': 'profile is update'}, status=status.HTTP_200_OK)
